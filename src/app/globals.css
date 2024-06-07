@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  
+}
+
+body {
+  font-family: 'new-rubrik', Arial, Helvetica, sans-serif !important;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2em;
+}
+
+@layer utilities {
+  
+}
