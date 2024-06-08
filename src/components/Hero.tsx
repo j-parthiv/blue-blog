@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
     <section className="h-auto py-6 flex flex-col xl:flex-row  gap-9 items-center">
       <div className="xl:w-6/12">
         <Badge title="Explore" />
-        <h1 className="text-5xl font-bold text-gray-900 mb-4 leading-snug tracking-wide my-5">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-snug tracking-wide my-5">
           Uncover compelling articles that will capture your interest
         </h1>
         <p className="text-md text-gray-700 mb-8 leading-normal tracking-wide">
@@ -35,11 +35,11 @@ const Hero: React.FC = () => {
         </button>
         <Modal isOpen={isModalOpen} onClose={closeModal} />
       </div>
-      <div className="xl:w-6/12 xl:p-9">
+      <div className="xl:w-1/2 xl:p-9">
         <Image
           src="/dummy.jpeg"
           alt="dummy"
-          width={600}
+          width={1000}
           height={400}
           className="rounded-xl"
         />
