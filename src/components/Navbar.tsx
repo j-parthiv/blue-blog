@@ -1,29 +1,47 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const navIcons = [
-  { src: "/assets/icons/search.svg", alt: "search", link: "/" },
-  { src: "/assets/icons/black-heart.svg", alt: "heart" },
-  { src: "/assets/icons/user.svg", alt: "user" },
-];
 const Navbar = () => {
+  const pathname = usePathname();
+
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
+
   return (
-    <header className="w-full bg-white z-10 border rounded-xl border-black	">
-      <nav className="flex justify-between items-center px-6 py-4">
+    <header className="w-full z-10 py-8">
+      <nav className="flex justify-between items-start px-6 py-4">
         <Link href="/" className="flex itmes-center gap-1">
-          <p className="font-spaceGrotesk text-[21px] font-bold">
-            Blue<span className="text-primary">Avenir</span>
-          </p>
+          <p className="text-[26px] font-bold">Blue Avenir</p>
         </Link>
+        <div className="flex gap-8">
+          {navItems.map((item) => (
+            <Link key={item.path} href={item.path}>
+              <p
+                className={`relative pb-3 ${
+                  pathname === item.path
+                    ? "font-bold text-black"
+                    : "text-gray-500"
+                }`}
+              >
+                {item.name}
+                {pathname === item.path && (
+                  <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-2 h-2 bg-black rounded-full mt-1" />
+                )}
+              </p>
+            </Link>
+          ))}
+        </div>
         <div className="flex items-center gap-9">
-          <Link href="/">Home</Link>
-          <p>About</p>
-          <p>Contact</p>
           <Image
             src="/assets/icons/user.svg"
+            alt="user"
             width={24}
             height={24}
-            alt="user"
           />
         </div>
       </nav>
