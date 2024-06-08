@@ -9,12 +9,12 @@ import React, {
 import axios from "axios";
 
 export interface Post {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-  }
-  
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
 interface PostsContextProps {
   posts: Post[];
   loading: boolean;
@@ -25,7 +25,7 @@ const PostsContext = createContext<PostsContextProps | undefined>(undefined);
 
 export const usePosts = (): PostsContextProps => {
   const context = useContext(PostsContext);
-  
+
   if (!context) {
     throw new Error("usePosts must be used within a PostsProvider");
   }
@@ -44,8 +44,14 @@ export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        // ("use server");
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts"
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            headers: {
+              "Cache-Control": "no-cache",
+            },
+          }
         );
         setPosts(response.data);
         setLoading(false);
