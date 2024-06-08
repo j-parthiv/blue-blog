@@ -3,8 +3,19 @@
 @tailwind utilities;
 
 :root {
-  
+  --color-primary: #0ba1e2;
+  --color-background: #ffffff;
+  --color-text: #000000;
 }
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 
 body {
   font-family: 'new-rubrik', Arial, Helvetica, sans-serif !important;
@@ -13,6 +24,53 @@ body {
   line-height: 1.2em;
 }
 
-@layer utilities {
-  
+body {
+  @apply bg-gradient-to-r from-white via-[#f0f4f8] to-[#0ba1e2];
+  min-height: 100vh;
+}
+
+.text-input {
+  padding: 12px;
+  border: 2px solid black;
+  border-radius: 4px;
+  /* box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2); */
+  outline: none;
+  color: dimgray;
+  background-color: transparent;
+}
+
+
+ /* Spinner */
+ .loader {
+  display: block;
+  width: 84px;
+  height: 84px;
+  position: relative;
+}
+
+.loader:before , .loader:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #0ba1e2;
+  transform: translate(-50% , -100%)  scale(0);
+  animation: push_401 2s infinite linear;
+}
+
+.loader:after {
+  animation-delay: 1s;
+}
+
+@keyframes push_401 {
+  0% , 50% {
+    transform: translate(-50% , 0%)  scale(1)
+  }
+
+  100% {
+    transform: translate(-50%, -100%) scale(0)
+  }
 }
