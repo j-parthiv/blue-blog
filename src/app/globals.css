@@ -4,7 +4,7 @@
 
 :root {
   --color-primary: #0ba1e2;
-  --color-background: #ffffff;
+  --color-background: rgb(255,255,255);
   --color-text: #000000;
 }
 
@@ -22,11 +22,7 @@ body {
   font-size: 15px;
   font-weight: 500;
   line-height: 1.2em;
-}
-
-body {
-  @apply bg-gradient-to-r from-white via-[#f0f4f8] to-[#0ba1e2];
-  min-height: 100vh;
+  background-color: var(--color-background);
 }
 
 .text-input {
@@ -56,7 +52,7 @@ body {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: #0ba1e2;
+  background: black;
   transform: translate(-50% , -100%)  scale(0);
   animation: push_401 2s infinite linear;
 }
