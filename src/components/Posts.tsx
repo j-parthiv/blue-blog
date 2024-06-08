@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { usePosts } from "../contexts/PostsContext";
 import PostCard from "./PostCard";
-import Image from "next/image";
-import { capitalizeFirstLetter } from "../utils/utils";
 import Spinner from "./Spinner";
-import Link from "next/link";
 import Pagination from "./Pagination";
 import Badge from "./Badge";
+
 const Posts = () => {
   const { posts, loading, error } = usePosts();
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -43,14 +41,14 @@ const Posts = () => {
     <>
       <section className="py-9" ref={postsContainerRef}>
         <div className=" flex flex-col justify-center items-center text-center">
-        <Badge title="Our Blogs" />
+          <Badge title="Our Blogs" />
           <h1 className="text-3xl font-bold text-gray-900 mb-4 leading-snug  my-5">
             Explore diverse categories of our articles
           </h1>
           {/* <p>Discover article that inspire and motivate you to reach new heights. Explore out content for valuable insighhhts and empowering stories that will fuel your ambition, Check it out</p> */}
           <input
             type="text"
-            className="w-1/2 my-5 p-3 border border-black rounded-3xl outline-none bg-transparent"
+            className="w-3/4 xl:w-1/2  my-5 p-3 border border-black rounded-3xl outline-none bg-transparent"
             placeholder="Search our blogs by titles"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
