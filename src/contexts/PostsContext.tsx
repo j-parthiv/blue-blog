@@ -1,19 +1,6 @@
 "use client";
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from "react";
-import axios from "axios";
 
-export interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+import React, { createContext, useContext, ReactNode, useReducer } from "react";
 
 interface PostsContextProps {
   posts: Post[];
@@ -21,52 +8,46 @@ interface PostsContextProps {
   error: Error | null;
 }
 
-const PostsContext = createContext<PostsContextProps | undefined>(undefined);
-
-export const usePosts = (): PostsContextProps => {
-  const context = useContext(PostsContext);
-
-  if (!context) {
-    throw new Error("usePosts must be used within a PostsProvider");
-  }
-  return context;
-};
-
 interface PostsProviderProps {
   children: ReactNode;
 }
 
+const initialState: PostsContextProps = {
+  posts: [],
+  loading: true,
+  error: null,
+};
+
+const Reducer = (state: PostsContextProps, action: any) => {
+  switch (action.type) {
+    case "UPDATE_POSTS":
+      return { ...state, posts: action.payload, loading: false };
+    case "FETCH_ERROR":
+      return { ...state, error: action.payload, loading: false };
+    default:
+      return state;
+  }
+};
+
+export const PostsContext = createContext<PostsContextProps | any>(
+  initialState
+);
+
 export const PostsProvider: React.FC<PostsProviderProps> = ({ children }) => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        // ("use server");
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts",
-          {
-            headers: {
-              "Cache-Control": "no-cache",
-            },
-          }
-        );
-        setPosts(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError(err as Error);
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+  const [state, dispatch] = useReducer(Reducer, initialState);
 
   return (
-    <PostsContext.Provider value={{ posts, loading, error }}>
+    <PostsContext.Provider value={[state, dispatch]}>
       {children}
     </PostsContext.Provider>
   );
+};
+
+export const usePostContext = () => {
+  const context = useContext(PostsContext);
+
+  if (!context) {
+    throw new Error("usePost must be used within a PostProvider");
+  }
+  return context;
 };
