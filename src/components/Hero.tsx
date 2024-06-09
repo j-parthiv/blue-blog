@@ -1,22 +1,25 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState, FC } from "react";
 import Modal from "./Modal";
 import Badge from "./Badge";
 
-const Hero: React.FC = () => {
+const Hero: FC = () => {
+  // State to manage the modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Function to open the modal
   const openModal = () => {
     setIsModalOpen(true);
   };
 
+  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   return (
-    <section className="h-auto py-6 flex flex-col xl:flex-row  gap-9 items-center">
+    <section className="h-auto py-6 flex flex-col xl:flex-row gap-9 items-center">
       <div className="xl:w-6/12">
         <Badge title="Explore" />
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-snug tracking-wide my-5">
