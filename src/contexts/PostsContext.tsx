@@ -1,5 +1,6 @@
 "use client";
 
+import { postTypes } from "@/utils/postEnums";
 import React, { createContext, useContext, ReactNode, useReducer } from "react";
 
 interface PostsContextProps {
@@ -20,9 +21,9 @@ const initialState: PostsContextProps = {
 
 const Reducer = (state: PostsContextProps, action: any) => {
   switch (action.type) {
-    case "UPDATE_POSTS":
+    case postTypes.UPDATE_POSTS:
       return { ...state, posts: action.payload, loading: false };
-    case "FETCH_ERROR":
+    case postTypes.FETCH_ERROR:
       return { ...state, error: action.payload, loading: false };
     default:
       return state;
