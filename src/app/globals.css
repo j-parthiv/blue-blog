@@ -3,36 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #0ba1e2;
   --color-background: rgb(255,255,255);
   --color-text: #000000;
 }
 
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  @apply m-0 p-0 box-border;
   scroll-behavior: smooth;
 }
 
 
 body {
-  font-family: 'new-rubrik', Arial, Helvetica, sans-serif !important;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.2em;
-  background-color: var(--color-background);
-}
+  @apply bg-[--color-background] text-[--color-text] text-[15px] font-medium leading-[1.2em];
 
-.text-input {
-  padding: 12px;
-  border: 2px solid black;
-  border-radius: 4px;
-  /* box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2); */
-  outline: none;
-  color: dimgray;
-  background-color: transparent;
 }
 
 
