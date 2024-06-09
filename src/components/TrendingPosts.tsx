@@ -1,11 +1,11 @@
-import React from "react";
+import { FC } from "react";
 import PostCard from "@/components/PostCard";
 
 interface TrendingPostsProps {
   posts: Post[];
 }
 
-const TrendingPosts: React.FC<TrendingPostsProps> = ({ posts }) => {
+const TrendingPosts: FC<TrendingPostsProps> = ({ posts }) => {
   return (
     <div className="mt-9">
       <h2 className="text-2xl font-semibold mb-4">Trending Posts</h2>
