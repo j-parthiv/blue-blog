@@ -8,8 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+       fontFamily: {
+        'new-rubrik': ['"New Rubrik"', 'Arial', 'Helvetica', 'sans-serif'],
+      },
       colors: {
-        primary: 'var(--color-primary)',
         background: 'var(--color-background)',
         text: 'var(--color-text)',
       },
