@@ -1,11 +1,11 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/Common/Spinner";
 import { usePostContext } from "@/contexts/PostsContext";
 import { capitalizeFirstLetter } from "@/utils/utils";
 import { getPostById } from "@/utils/api";
-import ErrorMessage from "@/components/ErrorMessage";
+import ErrorMessage from "@/components/ErrorLayout/ErrorMessage";
 
 interface SingleBlogProps {
   params: {
@@ -15,7 +15,7 @@ interface SingleBlogProps {
 
 const SingleBlog: FC<SingleBlogProps> = ({ params }) => {
   const [state] = usePostContext();
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<Post | undefined>(undefined);
 
   const { posts, loading: contextLoading, error } = state;
 
@@ -23,12 +23,10 @@ const SingleBlog: FC<SingleBlogProps> = ({ params }) => {
 
   // Fetch the post by ID if not already available in context
   useEffect(() => {
-    console.log(posts);
     if (!posts.length) {
       const fetchPost = async () => {
         try {
-          const res = await getPostById(params.id);
-          console.log(res);
+          const res: SinglePostProps = await getPostById(params.id);
           setPost(res.post);
           setLoading(false);
         } catch (err) {
@@ -37,9 +35,9 @@ const SingleBlog: FC<SingleBlogProps> = ({ params }) => {
       };
       fetchPost();
     } else {
-      setPost(posts.find((post: any) => post.id === parseInt(params.id, 10)));
+      setPost(posts.find((post: Post) => post.id === parseInt(params.id, 10)));
     }
-  }, [posts]);
+  }, [posts, params.id]);
 
   // Show spinner while loading
   if (loading) return <Spinner />;
@@ -65,7 +63,7 @@ const SingleBlog: FC<SingleBlogProps> = ({ params }) => {
         <hr />
         <div className="py-5 px-5 flex justify-between">
           <p className="text-gray-500">
-           Author: <strong>Anoymous</strong>
+            Author: <strong>Anoymous</strong>
           </p>
           <p className="text-gray-500">
             Date Published: <strong>5 April 2024</strong>
@@ -73,11 +71,11 @@ const SingleBlog: FC<SingleBlogProps> = ({ params }) => {
         </div>
         <hr />
         <div className="flex justify-center p-9">
-          <Image
-            src="/dummy-2.jpeg"
+          <img
+            src="/assets/images/dummy-2.jpeg"
             alt="post image"
             width={1000}
-            height={400}
+            height={1000}
             className="rounded-xl"
           />
         </div>

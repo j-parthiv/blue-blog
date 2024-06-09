@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FC } from "react";
-import { capitalizeFirstLetter } from "../utils/utils";
-import Badge from "./Badge";
+import { capitalizeFirstLetter } from "../../utils/utils";
+import Badge from "../Common/Badge";
 
 interface PostCardProps {
   post: Post;

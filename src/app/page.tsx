@@ -1,6 +1,6 @@
-import Hero from "@/components/Hero";
-import Posts from "@/components/Posts";
-import TrendingPosts from "@/components/TrendingPosts";
+import Hero from "@/components/Common/Hero";
+import Posts from "@/components/Posts/Posts";
+import TrendingPosts from "@/components/Posts/TrendingPosts";
 import { getPosts } from "@/utils/api";
 
 export default async function Home() {

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import PostCard from "@/components/PostCard";
+import PostCard from "@/components/Posts/PostCard";
 
 interface TrendingPostsProps {
   posts: Post[];

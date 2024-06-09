@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import PostCard from "./PostCard";
-import Pagination from "./Pagination";
-import Badge from "./Badge";
+import Pagination from "../Common/Pagination";
+import Badge from "../Common/Badge";
 import { usePostContext } from "@/contexts/PostsContext";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../ErrorLayout/ErrorMessage";
 
 const Posts: React.FC<PostProps> = ({ posts, error }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
