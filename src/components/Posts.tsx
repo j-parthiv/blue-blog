@@ -1,30 +1,35 @@
+"use client";
 import React, { useState, useEffect, useRef } from "react";
-import { usePosts } from "../contexts/PostsContext";
 import PostCard from "./PostCard";
 import Spinner from "./Spinner";
 import Pagination from "./Pagination";
 import Badge from "./Badge";
+import { PostProps } from "@/app/page";
+import { usePostContext } from "@/contexts/PostsContext";
 
-const Posts = () => {
-  const { posts, loading, error } = usePosts();
+const Posts = ({ posts, loading, error }: PostProps) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredPosts, setFilteredPosts] = useState(posts);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const postsPerPage = 10;
   const postsContainerRef = useRef<HTMLDivElement>(null);
+  const [_, dispatch] = usePostContext();
 
   useEffect(() => {
-    setFilteredPosts(
-      posts.filter((post) =>
-        post.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+    dispatch({ type: "UPDATE_POSTS", payload: posts });
+  }, []);
+
+  useEffect(() => {
+    const newFilteredPosts = posts?.filter((post) =>
+      post?.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    setFilteredPosts(newFilteredPosts);
     setCurrentPage(1); // Reset to first page on new search
   }, [searchQuery, posts]);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredPosts?.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber: number) => {
     if (pageNumber > currentPage && postsContainerRef.current) {
@@ -55,15 +60,13 @@ const Posts = () => {
           />
         </div>
         <div>
-          {currentPosts.length === 0 ? (
+          {currentPosts?.length === 0 ? (
             <div className="flex justify-center items-center py-10">
-              <p className="text-2xl font-semibold text-gray-700">
-                No Blogs Found
-              </p>
+              <p className="text-2xl font-semibold tex ">No Blogs Found</p>
             </div>
           ) : (
             <div className="py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
-              {currentPosts.map((post) => (
+              {currentPosts?.map((post) => (
                 <PostCard key={post.id} post={post} />
               ))}
             </div>
@@ -72,7 +75,7 @@ const Posts = () => {
         <div className="flex justify-center space-x-2 mt-4">
           <Pagination
             currentPage={currentPage}
-            totalPosts={filteredPosts.length}
+            totalPosts={filteredPosts?.length}
             postsPerPage={postsPerPage}
             paginate={paginate}
           />
