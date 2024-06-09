@@ -3,21 +3,18 @@ import Posts from "@/components/Posts";
 import TrendingPosts from "@/components/TrendingPosts";
 import { getPosts } from "@/utils/api";
 
-export interface PostProps {
-  posts: Post[];
-  loading: boolean;
-  error: any;
-}
-
 export default async function Home() {
-  const { posts, loading, error }: PostProps = await getPosts();
-  const nextThreePosts = posts?.slice(posts.length - 3, posts.length);
+  const { posts, error }: PostProps = await getPosts();
+
+  // Determine the posts to be shown in TrendingPosts
+  const nextThreePosts =
+    posts?.length >= 3 ? posts.slice(posts.length - 3, posts.length) : posts;
   return (
     <>
       <section className="flex flex-col gap-5 justify-center items-center	py-7">
         <Hero />
-        <Posts posts={posts} loading={loading} error={error} />
-        <TrendingPosts posts={nextThreePosts} />
+        <Posts posts={posts} error={error} />
+        {posts && posts.length > 0 && <TrendingPosts posts={nextThreePosts} />}
       </section>
     </>
   );
