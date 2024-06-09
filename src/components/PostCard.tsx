@@ -9,7 +9,7 @@ const PostCard = ({ post }: any) => {
       href={`/posts/${post.id}`}
       className="hover:-translate-y-5 duration-300 px-2"
     >
-      <div className="rounded-lg my-5">
+      <div className="flex justify-center rounded-lg my-5">
         <Image
           src={"/dummy-2.jpeg"}
           alt="Hero"
