@@ -8,6 +8,16 @@ interface Post {
   body: string;
 }
 
+interface PostProps {
+  posts: Post[];
+  error: any;
+}
+
+interface SinglePostProps {
+  post: Post | undefined;
+  error: any;
+}
+
 declare global {
   namespace NodeJS {
       interface ProcessEnv {
