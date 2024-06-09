@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { PostsProvider } from "../contexts/PostsContext";
 import Navbar from "../components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <PostsProvider>
-          <main className="w-full p-5 mx-auto 2xl:px-[10em] container">
+          <main className="w-full mx-auto 2xl:px-[10em] container">
             <Navbar />
-            {children}
+            <div className="p-5">{children}</div>
           </main>
+          <Footer />
         </PostsProvider>
       </body>
     </html>
